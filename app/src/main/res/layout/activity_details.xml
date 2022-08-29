@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:contentDescription="@string/total_count"
         android:id="@+id/totalCountTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
