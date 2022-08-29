@@ -8,4 +8,6 @@
     <string name="decrement_text">-</string>
     <string name="increment_text">+</string>
     <string name="to_details">to details</string>
+    <string name="find">FIND</string>
+    <string name="total_count">totalCount</string>
 </resources>
