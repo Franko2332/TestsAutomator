@@ -108,15 +108,60 @@ class BehaviorTest {
     }
 
     @Test
-    fun test_OpenDetailsScreenAndCheckResult(){
+    fun test_DetailsIncrement() {
+        uiDevice.findObject(By.res(packageName, "toDetailsActivityButton")).click()
+        val changedText =
+            uiDevice.wait(
+                Until.findObject(By.res(packageName, "totalCountTextView")),
+                TIMEOUT
+            )
+        uiDevice.findObject(UiSelector().text("+")).click()
+        val str = uiDevice.findObject(UiSelector().description("totalCount")).text
+        Assert.assertEquals("Number of results: 1", str)
+    }
+
+    @Test
+    fun test_DetailsDecrement() {
+        uiDevice.findObject(By.res(packageName, "toDetailsActivityButton")).click()
+        val changedText =
+            uiDevice.wait(
+                Until.findObject(By.res(packageName, "totalCountTextView")),
+                TIMEOUT
+            )
+        uiDevice.findObject(UiSelector().text("-")).click()
+        val str = uiDevice.findObject(UiSelector().description("totalCount")).text
+        Assert.assertEquals("Number of results: -1", str)
+    }
+
+    @Test
+    fun test_ProgressBarVisibilityWithEmptyResponse(){
+        uiDevice.findObject(UiSelector().text("FIND")).click()
+        val progressBar = uiDevice.findObject(By.res(packageName, "progressBar"))
+        Assert.assertNotNull(progressBar)
+    }
+
+    @Test
+    fun test_ProgressBarVisibilityWithNotEmptyResponse(){
+        uiDevice.findObject(By.res(packageName, "searchEditText")).text = "UiAutomator"
+        uiDevice.findObject(UiSelector().text("FIND")).click()
+        val progressBar = uiDevice.findObject(By.res(packageName, "progressBar"))
+        Assert.assertNotNull(progressBar)
+    }
+
+    @Test
+    fun test_OpenDetailsScreenAndCheckResult() {
         uiDevice.findObject(By.res(packageName, "searchEditText")).text = "UiAutomator"
         uiDevice.findObject(UiSelector().text("FIND")).click()
         uiDevice.wait(
             Until.findObject(By.res(packageName, "totalCountTextView")),
             TIMEOUT
         )
-        uiDevice.findObject(By.res(packageName,
-            "toDetailsActivityButton")).click()
+        uiDevice.findObject(
+            By.res(
+                packageName,
+                "toDetailsActivityButton"
+            )
+        ).click()
         val countTextview = uiDevice.findObject(UiSelector().description("totalCount"))
         Assert.assertEquals("Number of results: 718", countTextview.text)
     }
