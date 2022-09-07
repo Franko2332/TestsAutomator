@@ -8,6 +8,15 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    sourceSets{
+        androidTest{
+            java.srcDirs += "src/sharedTestData/java"
+        }
+        test {
+            java.srcDirs += "src/sharedTestData/java"
+        }
+    }
+
     defaultConfig {
         applicationId "com.geekbrains.tests"
         minSdkVersion 23

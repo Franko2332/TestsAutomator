@@ -166,6 +166,13 @@ class BehaviorTest {
         Assert.assertEquals("Number of results: 718", countTextview.text)
     }
 
+     @Test
+     fun sum(){
+        val int = 2147483647
+        val int1 = 2
+         Assert.assertEquals(4294967294, int*int1)
+     }
+
 
     companion object {
         private const val TIMEOUT = 5000L
