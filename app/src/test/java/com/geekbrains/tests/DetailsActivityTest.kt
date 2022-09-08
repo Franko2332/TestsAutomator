@@ -1,5 +1,10 @@
 package com.geekbrains.tests
 
+import NUMBER_OF_RESULT_MINUS_ONE
+import NUMBER_OF_RESULT_ONE
+import NUMBER_OF_RESULT_ZERO
+import TEST_NUMBER
+import TEST_ZERO
 import android.content.Context
 import android.os.Build
 import android.view.View
@@ -55,7 +60,7 @@ class DetailsActivityTest {
     fun activityTextView_HasText() {
         scenario.onActivity {
             val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
-            assertEquals("Number of results: 0", totalCountTextView.text)
+            assertEquals(NUMBER_OF_RESULT_ZERO, totalCountTextView.text)
         }
     }
 
@@ -85,7 +90,7 @@ class DetailsActivityTest {
             val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
             incrementButton.performClick()
 
-            assertEquals("Number of results: 1", totalCountTextView.text)
+            assertEquals(NUMBER_OF_RESULT_ONE, totalCountTextView.text)
         }
     }
 
@@ -96,29 +101,28 @@ class DetailsActivityTest {
             val totalCountTextView = it.findViewById<TextView>(R.id.totalCountTextView)
             decrementButton.performClick()
 
-            assertEquals("Number of results: -1", totalCountTextView.text)
+            assertEquals(NUMBER_OF_RESULT_MINUS_ONE, totalCountTextView.text)
         }
     }
 
     @Test
     fun activityCreateIntent_NotNull() {
-        val intent = DetailsActivity.getIntent(context, 0)
+        val intent = DetailsActivity.getIntent(context, TEST_ZERO)
         assertNotNull(intent)
     }
 
     @Test
     fun activityCreateIntent_HasExtras() {
-        val intent = DetailsActivity.getIntent(context, 0)
+        val intent = DetailsActivity.getIntent(context, TEST_ZERO)
         val bundle = intent.extras
         assertNotNull(bundle)
     }
 
     @Test
     fun activityCreateIntent_HasCount() {
-        val count = 42
-        val intent = DetailsActivity.getIntent(context, count)
+        val intent = DetailsActivity.getIntent(context, TEST_NUMBER)
         val bundle = intent.extras
-        assertEquals(count, bundle?.getInt(DetailsActivity.TOTAL_COUNT_EXTRA, 0))
+        assertEquals(TEST_NUMBER, bundle?.getInt(DetailsActivity.TOTAL_COUNT_EXTRA, TEST_ZERO))
     }
 
     @After
